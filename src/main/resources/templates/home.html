@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Favourite Movies</title>
+   <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+<div>
+<h1>List of your favourite movies</h1>
+<div class="filmcontainer">
+<div th:each="movie : ${movies}" id="list">
+  <ul>
+    <li><strong>Title: </strong> <span th:text="${movie.title}">Title</span></li>
+    <li><strong>Director: </strong> <span th:text="${movie.director}">Director</span></li>
+    <li><strong>Year: </strong><span th:text="${movie.year}">Year</span></li>
+      <li><strong>Personal Rating: </strong><span th:text="${movie.personalRating}">PersonalRating</span></li>
+  </ul>
+    <div class="editdelete">
+      <form  th:action="@{/edit/{id}(id=${movie.id})}">
+        <input type="submit" value="Edit" id="edit" class = "button" />
+    </form>
+    <form  th:action="@{/delete/{id}(id=${movie.id})}" >
+        <input type="submit" value="Delete" id="delete" class = "button" />
+    </form>
+    </div>
+    <br/>
+</div>
+</div>
+    <br/>
+    <hr align="center" width="90%" size="2" color="bisque" />
+    <br/>
+    <div class="actions">
+<form  th:action="@{/addmovie}">
+    <input type="submit" value="Add New Movie" id="add" class = "button"/>
+</form>
+<form method="POST" th:action="@{/logout}">
+    <input type="submit" value="Logout" id="logout" class = "button"/>
+</form>
+    </div>
+</div>
+</body>
+</html>

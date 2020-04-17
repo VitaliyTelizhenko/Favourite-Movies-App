@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MovieApp</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+</head>
+
+    <h1>Update</h1> <h1 th:text="${moviemodel.title}"></h1>
+<form method="POST" th:action="@{/update/{id}(id=${moviemodel.id})}" th:object="${moviemodel}">
+    <label>Title: </label>
+    <input type="text" th:field="*{title}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('title')}"
+          th:errors="*{title}">Title</span><br/>
+
+    <label>Director </label>
+    <input type="text"  th:field="*{director}"/><br/>
+
+    <label>Year </label>
+    <input type="text"  th:field="*{year}"/><br/>
+
+    <label>Personal Rating </label>
+    <input type="text"  th:field="*{personalRating}" /><br/>
+
+    <input type="submit" value="Edit"class="button" />
+
+</form>
+</body>
+</html>

@@ -1,0 +1,46 @@
+body {
+    background-color: darksalmon;
+    font-family: "Times New Roman";
+}
+h1 {
+    text-align: center;
+}
+.filmcontainer {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    font-size: 25px;
+}
+#list {
+    width: 25%;
+}
+.editdelete{
+    display: flex;
+    position: relative;
+    right: 50px;
+    justify-content: center;
+}
+#edit{
+    position: relative;
+}
+#delete{
+    position: relative;
+    left: 10px;
+}
+.actions{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+#add{
+    position: relative;
+}
+#logout{
+    position: relative;
+    left: 10px;
+}
+.button {
+    border-radius: 5px;
+    background: bisque;
+    font-size: 15px;
+}
