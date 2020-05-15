@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    container_name: dbcon
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    volumes:
+      - c:/Users/Acer/vol/db:/var/lib/postgresql/data
+    restart: always
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - 8080:8080
+    depends_on:
+      - db
+    restart: always
+
