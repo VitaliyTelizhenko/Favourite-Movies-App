@@ -1,14 +1,14 @@
-package com.favouritefilms.models;
+package com.favouritefilms.dto;
 
 import com.favouritefilms.entities.Movie;
 import com.favouritefilms.entities.User;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-public class MovieModel {
+public class MovieDTO {
 
     private Long id;
+
     @NotBlank(message = "Title is required")
     private String title;
     private String director;
@@ -16,10 +16,10 @@ public class MovieModel {
     private Integer personalRating;
     private User user;
 
-    public MovieModel() {
+    public MovieDTO() {
     }
 
-    public MovieModel(Movie movie) {
+    public MovieDTO(Movie movie) {
         this.id = movie.getId();
         this.title = movie.getTitle();
         this.director = movie.getDirector();
@@ -27,8 +27,19 @@ public class MovieModel {
         this.personalRating = movie.getPersonalRating();
         this.user = movie.getUser();
     }
-    public Movie toMovie(){
+    public Movie toNewMovie(){
+
         return new Movie(title, director, year, personalRating);
+    }
+
+    public Movie updateMovie(Movie movie){
+
+        movie.setTitle(title);
+        movie.setDirector(director);
+        movie.setYear(year);
+        movie.setPersonalRating(personalRating);
+
+        return movie;
     }
 
     public Long getId() {

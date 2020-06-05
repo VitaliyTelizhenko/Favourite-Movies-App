@@ -5,30 +5,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Form</title>
-    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <link rel="stylesheet" href="/static/css/form.css">
 </head>
 <body>
 <h1>Add the movie you like</h1>
-<form method="POST" th:action="@{/savemovie}" th:object="${moviemodel}">
+<form method="post" th:action="@{/savemovie}">
     <label>Title: </label>
-    <input type="text" th:field="*{title}"/>
-    <span class="validationError"
-          th:if="${#fields.hasErrors('title')}"
-          th:errors="*{title}">Title</span><br/>
+    <input type="text" name="title"/>
+    <span th:text="${titleError}? ${titleError} : ''"
+          class="validationError" /><br/>
 
     <label>Director </label>
-    <input type="text"  th:field="*{director}"/><br/>
+    <input type="text"  name="director"/><br/>
 
     <label>Year </label>
-    <input type="text"  th:field="*{year}"/><br/>
+    <input type="text"  name="year"/><br/>
 
     <label>Personal Rating </label>
-    <input type="text"  th:field="*{personalRating}" /><br/>
+    <input type="text"  name="personalRating" /><br/>
 
     <input type="submit" value="Add" class="button" />
 
 </form>
-
-
 </body>
 </html>

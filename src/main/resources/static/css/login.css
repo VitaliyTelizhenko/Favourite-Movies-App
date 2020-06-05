@@ -1,0 +1,20 @@
+body {
+    background-color: darksalmon;
+    font-family: "Times New Roman";
+    font-size: 25px;
+    text-align: center;
+}
+.button {
+    border-radius: 5px;
+    background: bisque;
+    font-size: 15px;
+}
+.error {
+    color: red;
+}
+
+.validationError {
+    position: relative;
+    left: 15px;
+    color: red;
+}

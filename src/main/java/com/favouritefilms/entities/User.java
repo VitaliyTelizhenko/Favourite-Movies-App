@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable, UserDetails {
+public class User implements UserDetails {
 
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)

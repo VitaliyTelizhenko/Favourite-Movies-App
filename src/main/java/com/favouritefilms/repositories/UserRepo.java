@@ -1,4 +1,4 @@
-package com.favouritefilms.dao;
+package com.favouritefilms.repositories;
 
 import com.favouritefilms.entities.User;
 import org.springframework.data.repository.CrudRepository;

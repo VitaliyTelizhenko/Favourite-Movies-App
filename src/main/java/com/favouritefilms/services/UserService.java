@@ -1,6 +1,6 @@
 package com.favouritefilms.services;
 
-import com.favouritefilms.dao.UserRepo;
+import com.favouritefilms.repositories.UserRepo;
 import com.favouritefilms.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,5 +27,9 @@ public class UserService
         }
         throw new UsernameNotFoundException(
                 "User '" + username + "' not found");
+    }
+
+    public void save(User newUser) {
+        userRepo.save(newUser);
     }
 }

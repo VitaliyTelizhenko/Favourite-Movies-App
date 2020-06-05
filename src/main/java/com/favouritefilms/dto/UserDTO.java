@@ -1,11 +1,12 @@
-package com.favouritefilms.models;
+package com.favouritefilms.dto;
 
 import com.favouritefilms.entities.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 
-public class UserModel {
+public class UserDTO {
+
     @NotBlank(message = "Username is required")
     private String username;
     @NotBlank(message = "Password is required")
@@ -16,16 +17,7 @@ public class UserModel {
     private  String lastName;
     private String email;
 
-    public UserModel() {
-    }
 
-    public UserModel(String username, String password, String firstName, String lastName, String email) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
     public User toUser(PasswordEncoder passwordEncoder) {
         return new User(
                 username, passwordEncoder.encode(password),

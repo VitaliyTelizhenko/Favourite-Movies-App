@@ -1,57 +1,57 @@
 package com.favouritefilms.controllers;
 
 
-import com.favouritefilms.dao.UserRepo;
-import com.favouritefilms.models.UserModel;
+import com.favouritefilms.dto.UserDTO;
+import com.favouritefilms.entities.User;
+import com.favouritefilms.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.naming.Binding;
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 public class RegistrationController {
-    private UserRepo userRepo;
-    private PasswordEncoder passwordEncoder;
 
-    public RegistrationController(UserRepo userRepo, PasswordEncoder passwordEncoder) {
-        this.userRepo = userRepo;
+    private  final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+
+    public RegistrationController(PasswordEncoder passwordEncoder, UserService userService) {
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 
-    @GetMapping("/registerform")
-    public String registerForm(Model model) {
-        model.addAttribute("usermodel", new UserModel());
+    @GetMapping("/registration")
+    public String registerForm() {
         return "registration";
     }
 
-    @GetMapping("/login")
-    public String loginForm() {
-        return "login";
-    }
-
-    @RequestMapping("/login-error")
-    public String loginError(Model model)
-    {
-        model.addAttribute("loginError", true);
-        return "login";
-    }
-
-    @PostMapping("/register")
-    public String processRegistration(@ModelAttribute("usermodel") @Valid UserModel userModel, BindingResult result) {
-        if (result.hasFieldErrors()) {
+    @PostMapping("/registration")
+    public String processRegistration(@Valid UserDTO userDTO,
+                                      BindingResult result,
+                                      Model model
+                                      ) {
+        if (result.hasErrors()) {
+            Map<String, String> errors = ControllerUtil.getErrors(result);
+            model.mergeAttributes(errors);
             return "registration";
         }
-        userRepo.save(userModel.toUser(passwordEncoder));
+
+        User newUser = userDTO.toUser(passwordEncoder);
+        userService.save(newUser);
+
         return "redirect:/login";
+    }
+
+    @GetMapping("/login-error")
+    public String loginError(Model model)
+    {
+        model.addAttribute("loginError", "Wrong username or password");
+        return "login";
     }
 }
 

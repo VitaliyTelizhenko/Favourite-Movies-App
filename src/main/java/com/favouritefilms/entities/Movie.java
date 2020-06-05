@@ -3,11 +3,10 @@ package com.favouritefilms.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "movies")
-public class Movie implements Serializable {
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
