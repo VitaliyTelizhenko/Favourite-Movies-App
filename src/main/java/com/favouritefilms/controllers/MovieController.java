@@ -4,6 +4,7 @@ import com.favouritefilms.dto.MovieDTO;
 import com.favouritefilms.entities.Movie;
 import com.favouritefilms.entities.User;
 import com.favouritefilms.services.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class MovieController {
 
     private final MovieService movieService;
 
+    @Autowired
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }

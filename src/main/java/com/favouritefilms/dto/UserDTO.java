@@ -1,7 +1,6 @@
 package com.favouritefilms.dto;
 
 import com.favouritefilms.entities.User;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 
@@ -18,9 +17,9 @@ public class UserDTO {
     private String email;
 
 
-    public User toUser(PasswordEncoder passwordEncoder) {
+    public User toUser() {
         return new User(
-                username, passwordEncoder.encode(password),
+                username, password,
                 firstName, lastName, email);
     }
 

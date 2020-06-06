@@ -3,12 +3,15 @@
       xmlns:th="http://www.thymeleaf.org"
       >
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>FavouriteMovies</title>
-    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/login.css" />
 </head>
 <body>
 <h1>Register</h1>
+
+<p th:if="${userExistsError}" th:text="${userExistsError}"
+        class="validationError"></p>
 <div class="form">
 <form method="post" th:action="@{/registration}">
     <label><strong> Username: </strong> </label>

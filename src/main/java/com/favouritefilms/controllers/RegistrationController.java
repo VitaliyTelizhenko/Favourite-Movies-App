@@ -4,6 +4,7 @@ package com.favouritefilms.controllers;
 import com.favouritefilms.dto.UserDTO;
 import com.favouritefilms.entities.User;
 import com.favouritefilms.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class RegistrationController {
     private  final PasswordEncoder passwordEncoder;
     private final UserService userService;
 
+    @Autowired
     public RegistrationController(PasswordEncoder passwordEncoder, UserService userService) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
@@ -41,8 +43,14 @@ public class RegistrationController {
             return "registration";
         }
 
-        User newUser = userDTO.toUser(passwordEncoder);
-        userService.save(newUser);
+        User newUser = userDTO.toUser();
+
+        if(!userService.save(newUser)) {
+
+            model.addAttribute("userExistsError", "User with this username already exists");
+            return "registration";
+
+        }
 
         return "redirect:/login";
     }
